@@ -510,7 +510,8 @@ class Premailer(object):
         if hasattr(html, "getroottree"):
             return root
         else:
-            kwargs.setdefault("method", self.method)
+            export_method = kwargs.pop('export_method', self.method)
+            kwargs.setdefault("method", export_method)
             kwargs.setdefault("pretty_print", pretty_print)
             kwargs.setdefault("encoding", "utf-8")  # As Ken Thompson intended
             out = etree.tostring(root, **kwargs).decode(kwargs["encoding"])
